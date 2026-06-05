@@ -109,7 +109,7 @@ class Ticket(models.Model):
             f"(row: {self.row}, seat: {self.seat})"
         )
 
-    def clean(self):
+    def clean(self) -> None:
         hall = self.movie_session.cinema_hall
 
         if self.row < 1 or self.row > hall.rows:
@@ -133,6 +133,6 @@ class Ticket(models.Model):
                 }
             )
 
-    def save(self, *args, **kwargs):
+    def save(self, *args, **kwargs) -> None:
         self.full_clean()
         super().save(*args, **kwargs)
